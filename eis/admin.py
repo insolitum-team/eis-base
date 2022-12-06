@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from eis.models import Article, Additional
+from eis.models import Article, Additional, URLs
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -17,5 +17,11 @@ class AdditionalAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
 
 
+class URLAdmin(admin.ModelAdmin):
+    list_display = ("url", )
+    search_fields = ("url", )
+
+
+admin.site.register(URLs, URLAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Additional, AdditionalAdmin)

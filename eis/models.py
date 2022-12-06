@@ -26,7 +26,6 @@ class Additional(models.Model):
     title = models.CharField(verbose_name="Заголовок", max_length=255)
     slug = models.CharField(verbose_name="Слаг", max_length=255, unique=True, db_index=True)
     comment = models.TextField(verbose_name="Комментарий")
-    url = models.URLField(verbose_name="Ссылка", blank=False)
     time_created = models.DateTimeField(verbose_name="Время создания", auto_now_add=True)
     time_updated = models.DateTimeField(verbose_name="Время обновления", auto_now=True)
 
@@ -40,3 +39,15 @@ class Additional(models.Model):
         verbose_name = "Дополнительная информация"
         verbose_name_plural = "Дополнительная информация"
         ordering = ["time_created"]
+
+
+class URLs(models.Model):
+    url = models.URLField(verbose_name="URL", blank=False)
+    additional = models.ForeignKey(Additional, blank=False, null=False, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.url
+
+    class Meta:
+        verbose_name = "Ссылки"
+        verbose_name_plural = "Ссылки"
